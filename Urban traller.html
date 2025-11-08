@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Urban Traveller — Link Page</title>
+  <style>
+    :root{--bg:#7a2be6;--pink:#ea7fcf;--black-shadow:#121212}
+    *{box-sizing:border-box;font-family: 'Montserrat', system-ui, sans-serif}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#3a0057);color:#fff;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:28px}
+    .card{width:100%;max-width:460px;text-align:center}
+    .avatar{width:120px;height:120px;border-radius:999px;margin:12px auto;background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center;border:6px solid rgba(255,255,255,0.08)}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+    h1{font-size:28px;margin:12px 0 6px;letter-spacing:1px}
+    p.lead{margin:2px 18px 18px;font-size:15px;opacity:0.95}
+
+    .wh{width:56px;height:56px;border-radius:999px;border:3px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;margin:8px auto 20px;background:transparent}
+
+    .links{display:flex;flex-direction:column;gap:18px;padding:6px}
+    .btn{background:var(--pink);padding:20px 12px;border-radius:6px;text-decoration:none;color:#0b0b0b;font-weight:600;display:block;position:relative;box-shadow:8px 8px 0 var(--black-shadow);border:3px solid rgba(0,0,0,0.15)}
+    .btn .more{position:absolute;right:12px;top:50%;transform:translateY(-50%);opacity:0.6}
+
+    /* bottom pill like linktr.ee */
+    .bottom-pill{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;background:#fff;padding:10px 18px;border-radius:40px;color:#111;font-weight:700}
+
+    @media(max-width:420px){.card{padding:6px}}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="avatar">
+      <!-- Replace 'profile.jpg' with your logo filename in the repo -->
+      <img src="profile.jpg" alt="logo" />
+    </div>
+    <h1>Urban Traveller</h1>
+    <p class="lead">Experience Jamshedpur with Urban Traveller! 🚕 Safe, comfy rides await!</p>
+
+    <a class="wh" id="wh-btn" title="Chat on WhatsApp" href="#" target="_blank" rel="noopener noreferrer">
+      <!-- simple WhatsApp SVG -->
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#25D366" d="M20.52 3.48A11.92 11.92 0 0 0 12 .1 11.9 11.9 0 0 0 3.48 3.48 11.9 11.9 0 0 0 .1 12c0 2.03.52 3.96 1.48 5.64L0 24l6.56-1.34A11.9 11.9 0 0 0 12 23.9 11.92 11.92 0 0 0 20.52 20.52 11.9 11.9 0 0 0 23.9 12a11.9 11.9 0 0 0-3.38-8.52z"/>
+        <path fill="#fff" d="M17.6 14.2c-.3-.15-1.76-.87-2.03-.96-.27-.08-.47-.15-.67.15s-.77.96-.94 1.16c-.17.2-.34.22-.63.07-.3-.15-1.23-.45-2.34-1.45-.86-.77-1.44-1.72-1.61-2.02-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.28.3-.47.1-.2 0-.36-.05-.5-.06-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51-.17-.01-.37-.01-.57-.01-.2 0-.5.07-.76.34-.27.27-1.03 1.01-1.03 2.47s1.05 2.87 1.2 3.07c.15.2 2.06 3.15 4.98 4.42 2.78 1.23 3.09.99 3.65.93.57-.06 1.76-.72 2.01-1.42.24-.7.24-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/>
+      </svg>
+    </a>
+
+    <div class="links">
+      <a class="btn" id="save-contact" href="#">Save My Number. Click Here <span class="more">⋮</span></a>
+      <a class="btn" href="#connect">Connect With Me <span class="more">⋮</span></a>
+      <a class="btn" href="#book">Book My Cab Service <span class="more">⋮</span></a>
+      <a class="btn" href="#reviews">Urban Traveller Reviews <span class="more">⋮</span></a>
+    </div>
+
+  </div>
+
+  <div class="bottom-pill">yourusername.github.io</div>
+
+  <script>
+    // --- CHANGE THESE ---
+    const PHONE = '911234567890'; // put number in international format without + or 00 (example: 919876543210)
+    const USERNAME = 'yourusername';
+    // ---------------------
+
+    // WhatsApp button link
+    document.getElementById('wh-btn').href = `https://wa.me/${PHONE}`;
+    // Save contact button: creates and downloads a vCard when clicked
+    document.getElementById('save-contact').addEventListener('click', function(e){
+      e.preventDefault();
+      const vcard = `BEGIN:VCARD\nVERSION:3.0\nFN:Urban Traveller\nTEL;TYPE=CELL:+${PHONE}\nORG:Urban Traveller\nEND:VCARD`;
+      const blob = new Blob([vcard], {type:'text/vcard'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'UrbanTraveller.vcf';
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    // show repo link in pill
+    document.querySelector('.bottom-pill').textContent = `${USERNAME}.github.io`;
+  </script>
+</body>
+</html>
